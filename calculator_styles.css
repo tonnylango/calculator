@@ -1,0 +1,20 @@
+.wrapper{
+	text-align: center;
+}
+
+.calc{
+	border: 2px solid black;
+	padding: 5;
+	width: 300px;
+	margin: 0 auto;
+	text-align: center;
+	display: inline-block;
+}
+
+input {
+	width: 100%;
+	padding: 10px;
+	margin: 10px;
+	direction: rtl;
+	box-sizing: border-box;
+}
