@@ -3,7 +3,7 @@
 <head>
 	<title>Calculator</title>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script type="text/javascript" src="calculator_js.js"></script>
+	<script type="text/javascript" src="calculator_js.js" onload="updateDisplay()"></script>
 	<link rel="stylesheet" type="text/css" href="calculator_styles.css">
 </head>
 <body>
@@ -11,7 +11,7 @@
 		<table class="calc" >
 			<tr>
 				<td colspan="4">
-					<textarea rows="2" class = "display" name="display" readonly>0</textarea>
+					<textarea rows="2" class = "display" name="display" readonly></textarea>
 				</td>
 			</tr>
 			<div class="buttons">
