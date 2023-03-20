@@ -24,10 +24,7 @@ $(document).ready(function(){
 		}
 
 		else if (typedDigit == "<="){ //deleting
-			question = question.slice(0, -1); //remove last character
-			if (question.length == 0){
-				question = "0"
-			}
+			question = (question.slice(0, -1).length === 0) ? "0" : question.slice(0, -1);
 		}
 
 		else if (typedDigit == "/" || typedDigit == "x"){ 
