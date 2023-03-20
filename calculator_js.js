@@ -1,8 +1,8 @@
 $(document).ready(function(){
 	var question = "0"; //should hold the question displayed
 	var answer = "0";//hold the answer displayed
-	var number = "0"; //hold the number being typed
-	var operator; //holds latest operator
+	const operators = ["/", "x", "+", "-"]; 
+	const operators_regex = new RegExp("[" + operators.join("") + "]", "g"); //create a regular expression
 
 	//define function to update the display
 	function updateDisplay(){
@@ -10,41 +10,40 @@ $(document).ready(function(){
 		$(".display").text(output); //update the display
 	}
 
+	//Call the updateDisplay() function on page load
 	updateDisplay();
-
-	/*
-	//if you click a number button, update question
-	$(".number").click(function(){
-		let typedDigit = $(this).text();
-		question = (question == "0") ? typedDigit : `${question}${typedDigit}`;
-		updateDisplay(); //update the display
-	});*/
 
 	$(".button").click(function(){
 		let typedDigit = $(this).text()
 		if ($.isNumeric(typedDigit)){
 			question = (question == "0") ? typedDigit : `${question}${typedDigit}`;
-			number = (number == "0") ? typedDigit : `${number}${typedDigit}`
 		}
-		else if (typedDigit == "." && !number.includes(".")){
-			question = `${question}${typedDigit}`;
-			number = number + typedDigit;
+		else if (typedDigit == "."){
+			var numbers = question.split(operators_regex)
+			question = (operators.includes(question[question.length - 1]) || question[question.length - 1] == "." || numbers[numbers.length - 1].includes(".")) ? question : `${question}${typedDigit}`;
 		}
+
 		else if (typedDigit == "<="){ //deleting
-			question = question.slice(0, -1);
+			question = question.slice(0, -1); //remove last character
 			if (question.length == 0){
 				question = "0"
 			}
 		}
 
+		else if (typedDigit == "/" || typedDigit == "x"){ 
+			question = (operators.includes(question[question.length - 1]) || question[question.length - 1] == ".") ? question : `${question}${typedDigit}`;
+		}
+
+		else if (typedDigit == "+" || typedDigit == "-") {
+			question = (question[question.length - 1] != ".") ? `${question}${typedDigit}` : question;
+		}
+
+		else if (typedDigit == "CE"){
+			question = answer  = "0";
+		}
+
 		updateDisplay(); //update the display
 
-
 	})
-
-	$(".clear").click(function(){
-		question = answer = number = "0";
-		updateDisplay();
-	});
 	
 });
