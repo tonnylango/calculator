@@ -39,6 +39,15 @@ $(document).ready(function(){
 			question = answer  = "0";
 		}
 
+		else if (typedDigit == "=") {
+			try { 
+			  answer = eval(question.replace(/x/g, "*")); //change x to * and calculate
+			} catch (error) {
+			  answer = "Error"
+			}
+
+		}
+
 		updateDisplay(); //update the display
 
 	})
